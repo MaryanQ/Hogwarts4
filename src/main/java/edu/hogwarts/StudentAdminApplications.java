@@ -1,13 +1,14 @@
-package edu.hogwarts.repositories;
+package edu.hogwarts;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
-public class StudentAdminApplication {
+public class StudentAdminApplications {
 
     public static void main(String[] args) {
-        SpringApplication.run(StudentAdminApplication.class, args);
+        SpringApplication.run(StudentAdminApplications.class, args);
     }
 
 }
