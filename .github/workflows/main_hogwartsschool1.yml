@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '17'
+          distribution: 'adopt'
 
       - name: Build with Maven
         run: mvn clean install
@@ -38,7 +39,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write
   
     steps:
       - name: Download artifact from build job
@@ -59,5 +60,6 @@ jobs:
         with:
           app-name: 'Hogwartsschool1'
           slot-name: 'Production'
-          package: '*.jar'
+          package: '${{ github.workspace }}/java-app/*.jar'
+
           
