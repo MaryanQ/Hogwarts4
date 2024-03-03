@@ -25,11 +25,19 @@ jobs:
         run: mvn clean install
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
-        with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
-           retention-days: 1
+
+  uses: actions/upload-artifact@v3
+  with:
+    name: java-app
+    path: '${{ github.workspace }}/target/*.jar'
+    retention-days: 1
+
+  uses: actions/upload-artifact@v3
+  with:
+    name: java-app
+    path: '${{ github.workspace }}/target/*.jar'
+    retention-days: 1
+
 
   deploy:
     runs-on: ubuntu-latest
