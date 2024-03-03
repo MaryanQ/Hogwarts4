@@ -14,22 +14,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java version
         uses: actions/setup-java@v2
         with:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean package
+        run: mvn clean install
 
-      - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v2
+      
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
         with:
           name: java-app
           path: '${{ github.workspace }}/target/*.jar'
+          retention-days: 1
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,12 +41,12 @@ jobs:
       
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target'
-
+      
       - name: Deploy to Azure Web App
+        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'hogwartsschool'
